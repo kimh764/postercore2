@@ -1,0 +1,57 @@
+body {
+  background: #9a9898;
+}
+a {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #7f7c7c;
+  font-size: 8vw;
+  position: absolute;
+  top: 50%; left: 50%;
+  margin: 0;
+  transform: translate(-50%,-50%);
+  letter-spacing: .15em;
+  &:hover {
+    text-decoration: none;
+    & > span i {
+      -webkit-text-stroke: 1px rgba(rgb(239, 12, 12), .3);
+    }
+  }
+  & > span {
+    position: relative;
+    i {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(#fff, .3);
+      transition:  200ms -webkit-text-stroke linear; 
+      will-change: -webkit-text-stroke, transform;
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-style: normal;
+      animation: 3s infinite alternate shift ease-in-out;
+      will-change: transform;
+      
+    }
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        z-index: #{10 - $i};
+        @for $j from 1 through 10 {
+          i:nth-child(#{$j}) {
+            transition-delay: calc(#{$i * 70ms} + #{$j * 10ms}); 
+            animation-delay: calc(#{$i * 170ms} + #{$j * 100ms});
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+@keyframes shift {
+  0% {
+    transform: translate(-.25em, 0);
+  }
+  50% {
+    transform: translate(.25em, 0);
+  }
+}
